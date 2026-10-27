@@ -1,0 +1,38 @@
+name: Bug report
+description: Something does not work as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not paste secrets or private model files. A minimal reproducer is worth more than a long description.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Include the command you ran and the full error / traceback.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: blender-loop version or commit
+      placeholder: "0.1.0 / e.g. 1a2b3c4"
+    validations:
+      required: true
+  - type: input
+    id: blender
+    attributes:
+      label: Blender version (if relevant)
+      placeholder: "4.2.9 LTS"
+  - type: textarea
+    id: bench
+    attributes:
+      label: Output of `blender-loop bench` (optional)
+      description: Paste `bench.json` or the HTML summary.
