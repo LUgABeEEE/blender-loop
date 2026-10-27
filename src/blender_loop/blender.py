@@ -100,7 +100,7 @@ def build_script_argv(
 
 def require_blender(config: BlenderConfig) -> str:
     """Return the resolved binary path or raise a helpful error."""
-    resolved = shutil.which(config.binary) if not os.path.sep in config.binary else config.binary
+    resolved = shutil.which(config.binary) if os.path.sep not in config.binary else config.binary
     if resolved and Path(resolved).is_file():
         return resolved
     raise BlenderError(

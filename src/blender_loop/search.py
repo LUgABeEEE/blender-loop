@@ -12,7 +12,7 @@ import random
 from collections.abc import Callable
 from dataclasses import dataclass, field
 
-from .params import ParamError, SearchSpace
+from .params import ParamError, ParamSpec, SearchSpace
 
 __all__ = [
     "BudgetExhausted",
@@ -54,12 +54,11 @@ class SearchSummary:
         return [point.score for point in self.history]
 
 
-def suggested_initial_step(spec: object) -> float:
+def suggested_initial_step(spec: ParamSpec) -> float:
     """Initial step size for one parameter: its hint, else 25% of the span."""
-    step = getattr(spec, "step", None)
-    if step is not None:
-        return float(step)
-    return float(getattr(spec, "span")) * 0.25
+    if spec.step is not None:
+        return float(spec.step)
+    return spec.span * 0.25
 
 
 def _is_better(candidate: float, incumbent: float, maximize: bool) -> bool:
